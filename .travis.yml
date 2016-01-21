@@ -4,7 +4,7 @@ php:
   - 5.5
   - 5.6
 
-before_install: printf "\n" | pecl install apcu-beta
+before_install: echo yes | pecl install apcu-4.0.10
 
 before_script:
   - echo "apc.enable_cli=On" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
