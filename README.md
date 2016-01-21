@@ -19,7 +19,7 @@ Wymanagania:
 
 ## Opis
 
-Projekt z przedmiotu *inżynieria systemów informacyjnych* napisany w PHP.
+Projekt z przedmiotu *inżynieria systemów informacyjnych* napisany w **PHP**.
 
 ## Autorzy
 
