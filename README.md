@@ -2,7 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/daniel-iwaniec/ISI-PRO/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/daniel-iwaniec/ISI-PRO/?branch=master)
-[![Build Status](https://travis-ci.org/daniel-iwaniec/ISI-PRO.svg?branch=develop)](https://travis-ci.org/daniel-iwaniec/ISI-PRO)
+[![Build Status](https://travis-ci.org/daniel-iwaniec/ISI-PRO.svg?branch=master)](https://travis-ci.org/daniel-iwaniec/ISI-PRO)
 
 Projekt z przedmiotu *inżynieria systemów informacyjnych*.
 
