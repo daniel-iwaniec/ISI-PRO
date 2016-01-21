@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <entity name="AppBundle\Entity\Actor"
+            repository-class="AppBundle\Repository\ActorRepository"
+            table="actor"
+            inheritance-type="JOINED">
+
+        <discriminator-column name="type" type="string"/>
+        <discriminator-map>
+            <discriminator-mapping value="administrator" class="Administrator"/>
+            <discriminator-mapping value="teacher" class="Teacher"/>
+            <discriminator-mapping value="student" class="Student"/>
+        </discriminator-map>
+
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="name" type="text" nullable="false"/>
+        <field name="surname" type="text" nullable="false"/>
+
+        <field name="createdAt" type="datetime" column="created_at">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" type="datetime" column="updated_at">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+        <one-to-one field="user" target-entity="UserBundle\Entity\User"/>
+    </entity>
+</doctrine-mapping>

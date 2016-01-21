@@ -1,0 +1,30 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1 class="page-header">
+        Klasa
+        <a class="btn btn-default" href="{{ path('klasa') }}" role="button">powrót do listy</a>
+    </h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Rok</th>
+                    <th>Nazwa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.number }}</td>
+                    <td>{{ entity.letter }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a class="btn btn-primary pull-left" href="{{ path('klasa_edit', { 'id': entity.id }) }}" role="button">edytuj</a>
+    <a class="btn btn-danger pull-right" href="{{ path('klasa_delete', { 'id': entity.id }) }}" role="button">usuń</a>
+{% endblock %}

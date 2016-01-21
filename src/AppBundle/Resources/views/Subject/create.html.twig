@@ -1,0 +1,11 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">
+        Nowy przedmiot
+        <a class="btn btn-default" href="{{ path('przedmiot') }}" role="button">powrót do listy</a>
+    </h1>
+
+    {{ form(form) }}
+{% endblock %}

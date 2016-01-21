@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="AppBundle\Entity\Grade"
+            repository-class="AppBundle\Repository\GradeRepository"
+            table="grade">
+
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="grade" type="smallint" nullable="false"/>
+
+        <many-to-one field="teacher" target-entity="Teacher">
+            <join-column name="teacher_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+
+        <many-to-one field="subject" target-entity="Subject">
+            <join-column name="subject_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+
+        <many-to-one field="student" target-entity="Student" inversed-by="grades">
+            <join-column name="student_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

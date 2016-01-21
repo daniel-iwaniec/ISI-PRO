@@ -1,0 +1,21 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">
+        Edycja klasy
+        <a class="btn btn-default" href="{{ path('klasa') }}" role="button">powrót do listy</a>
+    </h1>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            <strong>Sukces!</strong>
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    {{ form(form) }}
+{% endblock %}

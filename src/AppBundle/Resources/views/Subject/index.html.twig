@@ -1,0 +1,46 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1 class="page-header">
+        Przedmioty
+        <a class="btn btn-success" href="{{ path('przedmiot_create') }}" role="button">dodaj</a>
+    </h1>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            <strong>Sukces!</strong>
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nazwa</th>
+                    <th>Opcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in pagination %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td><a href="{{ path('przedmiot_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                        <td>
+                            <a class="btn btn-default" href="{{ path('przedmiot_show', { 'id': entity.id }) }}" role="button">pokaż</a>
+                            <a class="btn btn-primary" href="{{ path('przedmiot_edit', { 'id': entity.id }) }}" role="button">edytuj</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="crud-pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

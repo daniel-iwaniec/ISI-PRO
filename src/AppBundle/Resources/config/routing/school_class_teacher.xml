@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="class_teacher_add" path="/{class_id}/dodaj" methods="GET|POST|PUT">
+        <default key="_controller">AppBundle:SchoolClassTeacher:add</default>
+    </route>
+
+    <route id="class_teacher_remove" path="{class_id}/usun" methods="GET|POST|DELETE">
+        <default key="_controller">AppBundle:SchoolClassTeacher:remove</default>
+    </route>
+
+</routes>

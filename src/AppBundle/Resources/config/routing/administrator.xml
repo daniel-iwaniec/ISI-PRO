@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="administrator" path="/" methods="GET">
+        <default key="_controller">AppBundle:Administrator:index</default>
+    </route>
+
+    <route id="administrator_show" path="/{id}/show" methods="GET">
+        <default key="_controller">AppBundle:Administrator:show</default>
+    </route>
+
+    <route id="administrator_create" path="/create" methods="GET|PUT">
+        <default key="_controller">AppBundle:Administrator:create</default>
+    </route>
+
+    <route id="administrator_edit" path="/{id}/edit" methods="GET|POST">
+        <default key="_controller">AppBundle:Administrator:edit</default>
+    </route>
+
+    <route id="administrator_delete" path="/{id}/delete" methods="GET|DELETE">
+        <default key="_controller">AppBundle:Administrator:delete</default>
+    </route>
+
+    <route id="administrator_create_account" path="/{id}/create-account" methods="GET|POST">
+        <default key="_controller">AppBundle:Administrator:createAccount</default>
+    </route>
+
+    <route id="administrator_toggle_access" path="/{id}/toggle-access" methods="POST">
+        <default key="_controller">AppBundle:Administrator:toggleAccess</default>
+    </route>
+
+</routes>

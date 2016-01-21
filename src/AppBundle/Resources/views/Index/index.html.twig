@@ -1,0 +1,130 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body %}
+    <script>
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+
+    <h1 class="page-header">Technikum nr 4 im. Ryszarda Kaczorowskiego</h1>
+
+    <div class="row placeholders">
+        <div class="col-xs-8 col-sm-4 placeholder">
+            <script>
+                var attendanceChartData = [
+                    {% for present,count in attendances %}
+                    {
+                        value: {{ count }},
+                        {% if present == 0 %}
+                        color: "#A62300",
+                        highlight: "#A62300",
+                        label: 'Obecność ' + {{ count }},
+                        {% elseif present == 1 %}
+                        color: "#FFCA40",
+                        highlight: "#FFCA40",
+                        label: 'Nieobecność ' + {{ count }},
+                        {% endif %}
+                    },
+                    {% endfor %}
+                ];
+            </script>
+            <canvas id="attendance-chart" width="200" height="200"></canvas>
+            <h4>Frekwencja</h4>
+            <span class="text-muted">Procentowa frekwencja uczniów</span>
+        </div>
+        <div class="col-xs-8 col-sm-4 placeholder">
+            <script>
+                var gradeChartData = [
+                    {% for grade,count in grades %}
+                    {
+                        value: {{ count }},
+                        {% if grade == 1 %}
+                        color: "#FFCA40",
+                        highlight: "#FFCA40",
+                        {% elseif grade == 2 %}
+                        color: "#FFA640",
+                        highlight: "#FFA640",
+                        {% elseif grade == 3 %}
+                        color: "#FF8900",
+                        highlight: "#FF8900",
+                        {% elseif grade == 4 %}
+                        color: "#FF6840",
+                        highlight: "#FF6840",
+                        {% elseif grade == 5 %}
+                        color: "#FF3500",
+                        highlight: "#FF3500",
+                        {% elseif grade == 6 %}
+                        color: "#A62300",
+                        highlight: "#A62300",
+                        {% endif %}
+                        label: 'Ocena ' + {{ grade }}
+                    },
+                    {% endfor %}
+                ];
+            </script>
+            <canvas id="grade-chart" width="200" height="200"></canvas>
+            <h4>Rozkład ocen</h4>
+            <span class="text-muted">Częstotliwość występowania określonych ocen</span>
+        </div>
+        <div class="col-xs-8 col-sm-4 placeholder">
+            <script>
+                var studentsByClassChartData = [
+                    {% for student in studentsByClass %}
+                    {
+                        value: {{ student[1] }},
+                        color: getRandomColor(),
+                        label: 'Klasa ' + '{{ repository.getById(student.id) }}',
+                    },
+                    {% endfor %}
+                ];
+            </script>
+            <canvas id="class-chart" width="200" height="200"></canvas>
+            <h4>Rozkład uczniów</h4>
+            <span class="text-muted">Ilość uczniów w poszczególnych klasach</span>
+        </div>
+    </div>
+
+    <h2 class="sub-header">Klasy w szkole</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Klasa</th>
+                    <th>Ilość uczniów</th>
+                    <th>Opcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in pagination %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{{ entity }}</td>
+                        {% set count = repository.countStudentsForClass(entity.id) %}
+                        {% if count > 0 %}
+                            <td>
+                                <span class="label label-success" style="font-size: 16px; padding-bottom: 0.2em; position: relative; top: 7px;">{{ count }}</span>
+                            </td>
+                        {% else %}
+                            <td>
+                                <span class="label label-default" style="font-size: 16px; padding-bottom: 0.2em; position: relative; top: 7px;">{{ count }}</span>
+                            </td>
+                        {% endif %}
+                        <td>
+                            <a class="btn btn-default" href="{{ path('klasa_show', { 'id': entity.id }) }}" role="button">pokaż</a>
+                            <a class="btn btn-primary" href="{{ path('klasa_edit', { 'id': entity.id }) }}" role="button">edytuj</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="crud-pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

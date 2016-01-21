@@ -1,0 +1,18 @@
+{
+  "name": "daniel-iwaniec-edu-management",
+  "version": "0.1.0",
+  "author": "Daniel Iwaniec, Artur Kałuża, Karol Gos, Karol Gołuch",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "jQuery": "~2.1.3",
+    "Chart.js": "~1.0.2"
+  },
+  "resolutions": {
+    "bootstrap": "~3.3.1"
+  },
+  "devDependencies": {
+    "holderjs": "~2.5.2"
+  }
+}

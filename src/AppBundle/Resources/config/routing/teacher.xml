@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="nauczyciel" path="/" methods="GET">
+        <default key="_controller">AppBundle:Teacher:index</default>
+    </route>
+
+    <route id="nauczyciel_show" path="/{id}/show" methods="GET">
+        <default key="_controller">AppBundle:Teacher:show</default>
+    </route>
+
+    <route id="nauczyciel_create" path="/create" methods="GET|PUT">
+        <default key="_controller">AppBundle:Teacher:create</default>
+    </route>
+
+    <route id="nauczyciel_edit" path="/{id}/edit" methods="GET|POST">
+        <default key="_controller">AppBundle:Teacher:edit</default>
+    </route>
+
+    <route id="nauczyciel_delete" path="/{id}/delete" methods="GET|DELETE">
+        <default key="_controller">AppBundle:Teacher:delete</default>
+    </route>
+
+    <route id="nauczyciel_create_account" path="/{id}/create-account" methods="GET|POST">
+        <default key="_controller">AppBundle:Teacher:createAccount</default>
+    </route>
+
+    <route id="nauczyciel_toggle_access" path="/{id}/toggle-access" methods="POST">
+        <default key="_controller">AppBundle:Teacher:toggleAccess</default>
+    </route>
+
+</routes>

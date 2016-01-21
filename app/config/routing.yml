@@ -1,0 +1,38 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+fos_user:
+    resource: "@UserBundle/Resources/config/routing.xml"
+
+app_administrator:
+    resource: "@AppBundle/Resources/config/routing/administrator.xml"
+    prefix:   /administrator
+
+app_nauczyciel:
+    resource: "@AppBundle/Resources/config/routing/teacher.xml"
+    prefix:   /nauczyciel
+
+app_uczen:
+    resource: "@AppBundle/Resources/config/routing/student.xml"
+    prefix:   /uczen
+
+app_klasa:
+     resource: "@AppBundle/Resources/config/routing/school_class.xml"
+     prefix:   /klasa
+
+app_przedmiot:
+     resource: "@AppBundle/Resources/config/routing/subject.xml"
+     prefix:   /przedmiot
+
+app_klasa_nauczyciel:
+     resource: "@AppBundle/Resources/config/routing/school_class_teacher.xml"
+     prefix:   /klasa-nauczyciel
+
+app_ocena:
+     resource: "@AppBundle/Resources/config/routing/grade.xml"
+     prefix:   /ocena
+
+app_obecnosc:
+    resource: "@AppBundle/Resources/config/routing/attendance.xml"
+    prefix:   /obecnosc

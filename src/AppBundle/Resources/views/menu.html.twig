@@ -1,0 +1,96 @@
+<div class="col-sm-3 col-md-2 sidebar">
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul class="nav nav-pills nav-stacked">
+            <li><h3>Administracja</h3></li>
+            <li{% if app.request.get('_route') == 'index' %} class="active"{% endif %}>
+                <a href="{{ path('index') }}">
+                    Panel główny
+                    {% if app.request.get('_route') == 'index' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li{% if app.request.get('_route') starts with 'administrator' %} class="active"{% endif %}>
+                <a href="{{ path('administrator') }}">
+                    Administratorzy
+                    {% if app.request.get('_route') == 'administrator' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-pills nav-stacked">
+            <li><h3>Szkoła</h3></li>
+            <li{% if app.request.get('_route') starts with 'klasa' %} class="active"{% endif %}>
+                <a href="{{ path('klasa') }}">
+                    Klasy
+                    {% if app.request.get('_route') == 'klasa' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li{% if app.request.get('_route') starts with 'uczen' %} class="active"{% endif %}>
+                <a href="{{ path('uczen') }}">
+                    Uczniowie
+                    {% if app.request.get('_route') == 'uczen' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li{% if app.request.get('_route') starts with 'nauczyciel' %} class="active"{% endif %}>
+                <a href="{{ path('nauczyciel') }}">
+                    Nauczyciele
+                    {% if app.request.get('_route') == 'nauczyciel' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li{% if app.request.get('_route') starts with 'przedmiot' %} class="active"{% endif %}>
+                <a href="{{ path('przedmiot') }}">
+                    Przedmioty
+                    {% if app.request.get('_route') == 'przedmiot' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+        </ul>
+    {% elseif is_granted('ROLE_TEACHER') %}
+        <ul class="nav nav-pills nav-stacked">
+            <li><h3>Szkoła</h3></li>
+            <li{% if app.request.get('_route') starts with 'klasa' %} class="active"{% endif %}>
+                <a href="{{ path('klasa') }}">
+                    Klasy
+                    {% if app.request.get('_route') == 'klasa' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            <li{% if app.request.get('_route') starts with 'uczen' %} class="active"{% endif %}>
+                <a href="{{ path('uczen') }}">
+                    Uczniowie
+                    {% if app.request.get('_route') == 'uczen' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+        </ul>
+    {% elseif is_granted('ROLE_STUDENT') %}
+        <ul class="nav nav-pills nav-stacked">
+            <li><h3>Szkoła</h3></li>
+            <li{% if app.request.get('_route') starts with 'ocena' %} class="active"{% endif %}>
+                <a href="{{ path('ocena', { 'student_id': app.user.actor.id }) }}">
+                    Oceny
+                    {% if app.request.get('_route') == 'ocena' %}
+                        <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+    <ul class="nav nav-pills nav-stacked">
+        <li><h3>Inne</h3></li>
+        <li>
+            <a href="{{ path('fos_user_security_logout') }}">Wyloguj</a>
+        </li>
+    </ul>
+</div>

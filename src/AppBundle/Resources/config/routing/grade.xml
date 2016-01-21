@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="ocena" path="/{student_id}" methods="GET">
+        <default key="_controller">AppBundle:Grade:index</default>
+    </route>
+
+    <route id="ocena_create" path="/{student_id}/create" methods="GET|PUT">
+        <default key="_controller">AppBundle:Grade:create</default>
+    </route>
+
+    <route id="ocena_delete" path="/{grade_id}/delete" methods="GET|DELETE">
+        <default key="_controller">AppBundle:Grade:delete</default>
+    </route>
+
+</routes>

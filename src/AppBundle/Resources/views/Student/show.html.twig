@@ -1,0 +1,30 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1 class="page-header">
+        Uczeń
+        <a class="btn btn-default" href="{{ path('uczen') }}" role="button">powrót do listy</a>
+    </h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.surname }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a class="btn btn-primary pull-left" href="{{ path('uczen_edit', { 'id': entity.id }) }}" role="button">edytuj</a>
+    <a class="btn btn-danger pull-right" href="{{ path('uczen_delete', { 'id': entity.id }) }}" role="button">usuń</a>
+{% endblock %}

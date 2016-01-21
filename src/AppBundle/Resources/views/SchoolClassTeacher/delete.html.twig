@@ -1,0 +1,12 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">
+        Usuwanie nauczyciela z klasy
+        <a class="btn btn-default" href="{{ path('klasa') }}" role="button">powrót do listy</a>
+    </h1>
+
+    {{ form(form) }}
+    <a class="btn btn-success pull-left" href="{{ path('klasa') }}" role="button">anuluj</a>
+{% endblock %}

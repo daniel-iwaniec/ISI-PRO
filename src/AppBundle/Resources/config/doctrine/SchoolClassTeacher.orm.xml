@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="AppBundle\Entity\SchoolClassTeacher"
+            repository-class="AppBundle\Repository\SchoolClassTeacherRepository"
+            table="school_class_teacher">
+
+        <unique-constraints>
+            <unique-constraint columns="class_id,teacher_id,subject_id" name="school_class_teacher_unq_idx"/>
+        </unique-constraints>
+
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <many-to-one field="class" target-entity="SchoolClass" inversed-by="school_class_teacher">
+            <join-column name="class_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+        <many-to-one field="teacher" target-entity="Teacher">
+            <join-column name="teacher_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+        <many-to-one field="subject" target-entity="Subject">
+            <join-column name="subject_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

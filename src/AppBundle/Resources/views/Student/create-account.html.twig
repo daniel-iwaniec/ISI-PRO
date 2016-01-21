@@ -1,0 +1,16 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">
+        Utwórz konto dla ucznia {{ entity }}
+        <a class="btn btn-default" href="{{ path('uczen') }}" role="button">powrót do listy</a>
+    </h1>
+
+    <form action="{{ path('uczen_create_account', {id: entity.id}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="utwórz" class="btn btn-success pull-left btn-add">
+        </div>
+    </form>
+{% endblock %}

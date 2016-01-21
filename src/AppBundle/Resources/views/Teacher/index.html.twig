@@ -1,0 +1,80 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1 class="page-header">
+        Nauczyciele
+        <a class="btn btn-success" href="{{ path('nauczyciel_create') }}" role="button">dodaj</a>
+    </h1>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            <strong>Sukces!</strong>
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Błąd!</strong>
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Opcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in pagination %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td><a href="{{ path('nauczyciel_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                        <td>{{ entity.surname }}</td>
+                        <td>
+                            <a class="btn btn-default" href="{{ path('nauczyciel_show', { 'id': entity.id }) }}" role="button">pokaż</a>
+                            <a class="btn btn-primary" href="{{ path('nauczyciel_edit', { 'id': entity.id }) }}" role="button">edytuj</a>
+                            {% if not entity.user %}
+                                <a class="btn btn-primary" href="{{ path('nauczyciel_create_account', { 'id': entity.id }) }}" role="button">utwórz konto</a>
+                            {% else %}
+                                {% if entity.user.enabled %}
+                                    {% set toggleAccess = listOptionCreator.createToggleAccessOption().createView() %}
+                                    <form action="{{ path('nauczyciel_toggle_access', {id: entity.id}) }}" method="POST" class="toggle-access-form">
+                                        {{ form_widget(toggleAccess.submit, {
+                                            'attr': {'class': 'btn btn-danger revoke-access-button'},
+                                            'label': 'odbierz dostęp'
+                                        }) }}
+                                        {{ form_widget(toggleAccess) }}
+                                    </form>
+                                {% else %}
+                                    {% set toggleAccess = listOptionCreator.createToggleAccessOption().createView() %}
+                                    <form action="{{ path('nauczyciel_toggle_access', {id: entity.id}) }}" method="POST" class="toggle-access-form">
+                                        {{ form_widget(toggleAccess.submit, {
+                                            'attr': {'class': 'btn btn-success grant-access-button'},
+                                            'label': 'nadaj dostęp'
+                                        }) }}
+                                        {{ form_widget(toggleAccess) }}
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="crud-pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

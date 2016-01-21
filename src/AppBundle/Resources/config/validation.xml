@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="AppBundle\Entity\Actor">
+        <property name="name">
+            <constraint name="NotBlank"/>
+            <constraint name="Length">
+                <option name="max">255</option>
+            </constraint>
+        </property>
+        <property name="surname">
+            <constraint name="NotBlank"/>
+            <constraint name="Length">
+                <option name="max">255</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="AppBundle\Entity\Student">
+        <property name="class">
+            <constraint name="NotBlank"/>
+        </property>
+    </class>
+
+    <class name="AppBundle\Entity\Subject">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">name</option>
+            <option name="message">Taki przedmiot już istnieje</option>
+        </constraint>
+        <property name="name">
+            <constraint name="NotBlank"/>
+            <constraint name="Length">
+                <option name="max">255</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="AppBundle\Entity\SchoolClass">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>number</value>
+                <value>letter</value>
+            </option>
+            <option name="message">Taka klasa już istnieje</option>
+        </constraint>
+        <property name="number">
+            <constraint name="NotBlank"/>
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="max">4</option>
+            </constraint>
+        </property>
+        <property name="letter">
+            <constraint name="Regex">
+                <option name="pattern">/[A-Z]+/</option>
+                <option name="message">Nazwa klasy musi być dużą literą</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="AppBundle\Entity\SchoolClassTeacher">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>class</value>
+                <value>teacher</value>
+                <value>subject</value>
+            </option>
+            <option name="message">Ten nauczyciel uczy już tego przedmiotu w tej klasie.</option>
+        </constraint>
+        <property name="class">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="teacher">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="subject">
+            <constraint name="NotBlank"/>
+        </property>
+    </class>
+
+    <class name="AppBundle\Entity\Grade">
+        <property name="grade">
+            <constraint name="NotBlank"/>
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="max">6</option>
+            </constraint>
+        </property>
+        <property name="teacher">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="subject">
+            <constraint name="NotBlank"/>
+        </property>
+        <property name="student">
+            <constraint name="NotBlank"/>
+        </property>
+    </class>
+
+    <class name="AppBundle\Entity\Attendance">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>check_date</value>
+                <value>student</value>
+            </option>
+            <option name="message">Obecność w tym dniu została już sprawdzona.</option>
+        </constraint>
+        <property name="check_date">
+            <constraint name="NotBlank"/>
+            <constraint name="Date"/>
+        </property>
+        <property name="present">
+            <constraint name="Type">
+                <option name="type">boolean</option>
+            </constraint>
+        </property>
+        <property name="student">
+            <constraint name="NotBlank"/>
+        </property>
+    </class>
+
+</constraint-mapping>

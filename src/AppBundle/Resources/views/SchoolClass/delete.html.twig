@@ -1,0 +1,17 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">
+        Usuwanie klasy
+        <a class="btn btn-default" href="{{ path('klasa') }}" role="button">powrót do listy</a>
+    </h1>
+
+    <div class="alert alert-warning" role="alert">
+        <strong>Ostrożnie!</strong>
+        Czy jesteś pewien, że chcesz na zawsze usunąć klasę <em>{{ entity }}</em>?
+    </div>
+
+    <a class="btn btn-success pull-left" href="{{ path('klasa_show', { 'id': entity.id }) }}" role="button">anuluj</a>
+    {{ form(form) }}
+{% endblock %}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="klasa" path="/" methods="GET">
+        <default key="_controller">AppBundle:SchoolClass:index</default>
+    </route>
+
+    <route id="klasa_show" path="/{id}/show" methods="GET">
+        <default key="_controller">AppBundle:SchoolClass:show</default>
+    </route>
+
+    <route id="klasa_create" path="/create" methods="GET|PUT">
+        <default key="_controller">AppBundle:SchoolClass:create</default>
+    </route>
+
+    <route id="klasa_edit" path="/{id}/edit" methods="GET|POST">
+        <default key="_controller">AppBundle:SchoolClass:edit</default>
+    </route>
+
+    <route id="klasa_delete" path="/{id}/delete" methods="GET|DELETE">
+        <default key="_controller">AppBundle:SchoolClass:delete</default>
+    </route>
+
+</routes>

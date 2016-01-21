@@ -1,0 +1,64 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1 class="page-header">
+        Klasy
+        {% if is_granted('ROLE_ADMIN') %}<a class="btn btn-success" href="{{ path('klasa_create') }}" role="button">dodaj</a>{% endif %}
+    </h1>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            <strong>Sukces!</strong>
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Błąd!</strong>
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Rok</th>
+                    <th>Nazwa</th>
+                    <th>Opcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in pagination %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{{ entity.number }}</td>
+                        <td>{{ entity.letter }}</td>
+                        <td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-default" href="{{ path('klasa_show', { 'id': entity.id }) }}" role="button">pokaż</a>
+                            <a class="btn btn-primary" href="{{ path('klasa_edit', { 'id': entity.id }) }}" role="button">edytuj</a>
+                            {% endif %}
+                            <a class="btn btn-primary" href="{{ path('obecnosc_create', { 'class_id': entity.id }) }}" role="button">sprawdź obecność</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-success" href="{{ path('class_teacher_add', { 'class_id': entity.id }) }}" role="button">dodaj nauczyciela</a>
+                            <a class="btn btn-danger" href="{{ path('class_teacher_remove', { 'class_id': entity.id }) }}" role="button">usuń nauczyciela</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="crud-pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

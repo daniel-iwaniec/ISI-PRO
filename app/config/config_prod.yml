@@ -1,0 +1,22 @@
+imports:
+    - { resource: config.yml }
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  "php://stderr"
+            level: debug
+        console:
+            type:  console
+
+doctrine:
+    orm:
+        auto_mapping: true
+        result_cache_driver:   apc
+        query_cache_driver:    apc
+        metadata_cache_driver: apc
