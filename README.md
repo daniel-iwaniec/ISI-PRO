@@ -15,7 +15,7 @@ Wymanagania:
 ## Instalacja
 
 - Instalacja backendu za pomocą `composer install && php app/console doctrine:schema:create`.
-- Instalacja frontendu `npm install && bower install && grunt`.
+- Instalacja frontendu za pomocą `npm install && bower install && grunt`.
 
 ## Opis
 
